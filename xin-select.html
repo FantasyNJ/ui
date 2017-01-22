@@ -85,12 +85,12 @@
             overflow-y: auto;
             transform-origin: center top 0px;
             transform: scaleY(0);
-            transition: transform .25s ;
+            transition: transform .25s;
             box-shadow: 0 2px 4px rgba(0,0,0,.12), 0 0 6px rgba(0,0,0,.04);
         }
         .my-option li{
             transform: scaleY(0);
-            transition: transform .25s ;
+            transition: transform .25s;
             transform-origin: center top 0px;
         }
 
@@ -114,8 +114,11 @@
             cursor: pointer;
         }
         .my-option li.selected{
-            background-color: #1c8de0;
+            background-color: #20a0ff;
             color: #fff;
+        }
+        .my-option li.selected:hover{
+            background-color: #1c8de0;
         }
         .my-option li:hover{
             background-color: #e4e8f1;
@@ -134,17 +137,31 @@
         <li>龙须面</li>
         <li>北京烤鸭</li>
         <li>龙须面</li>
-        <!--<li>北京烤鸭</li>-->
-        <!--<li>龙须面</li>-->
-        <!--<li>黄金糕</li>-->
-        <!--<li>北京烤鸭</li>-->
-        <!--<li>龙须面</li>-->
-        <!--<li>黄金糕</li>-->
-        <!--<li>北京烤鸭</li>-->
-        <!--<li>黄金糕</li>-->
+        <li>炸酱面</li>
+        <li>糖醋鲤鱼</li>
+        <li>爆炒腰花</li>
+        <li>九转大肠</li>
     </ul>
 </span>
 <p><a href="#">aaaaaaaaaa</a></p>
+<p><a href="#">aaaaaaaaaa</a></p>
+<p><a href="#">aaaaaaaaaa</a></p>
+<p><a href="#">aaaaaaaaaa</a></p>
+<p><a href="#">aaaaaaaaaa</a></p>
+<p><a href="#">aaaaaaaaaa</a></p>
+<p><a href="#">aaaaaaaaaa</a></p>
+<p><a href="#">aaaaaaaaaa</a></p>
+<p><a href="#">aaaaaaaaaa</a></p>
+<p><a href="#">aaaaaaaaaa</a></p>
+<p><a href="#">aaaaaaaaaa</a></p>
+<p><a href="#">aaaaaaaaaa</a></p>
+<p><a href="#">aaaaaaaaaa</a></p>
+<p><a href="#">aaaaaaaaaa</a></p>
+<p><a href="#">aaaaaaaaaa</a></p>
+<p><a href="#">aaaaaaaaaa</a></p>
+<p><a href="#">aaaaaaaaaa</a></p>
+<p><a href="#">aaaaaaaaaa</a></p>
+
 
 <script src="select/jquery-3.1.1.min.js"></script>
 <script>
@@ -159,7 +176,6 @@
         $('.i-triangle').toggleClass('is-reverse');
         clearTimeout( timer );
 
-        console.log($t.prop('isShow'))
         if( on === false ){
             p.find('.my-option').show();
             timer = setTimeout(function(){

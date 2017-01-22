@@ -12,7 +12,7 @@
         }
         body{
             margin: 10px;
-            padding: 0;
+            padding-top: 1000px;
             font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
         }
         li{
@@ -66,6 +66,8 @@
             padding-right: 35px;
             transition: border-color .2s cubic-bezier(.645,.045,.355,1);
             cursor: pointer;
+            -moz-user-select: none;
+            user-select: none;
         }
         .my-select input:hover{
             border-color: #8391a5;
@@ -125,7 +127,7 @@
         }
     </style>
 </head>
-<body>
+<body style="height: 2000px;">
 
 <span class="my-select-wrap">
     <div class="my-select">
@@ -136,7 +138,7 @@
         <li>黄金糕</li>
         <li>龙须面</li>
         <li>北京烤鸭</li>
-        <li>龙须面</li>
+        <li>京酱肉丝</li>
         <li>炸酱面</li>
         <li>糖醋鲤鱼</li>
         <li>爆炒腰花</li>
@@ -165,9 +167,15 @@
 
 <script src="select/jquery-3.1.1.min.js"></script>
 <script>
+    console.log( $('.my-option').offset() );
+    console.log( $('.my-option').outerWidth() );
+
     var timer = null;
     $('.my-select').each(function(index, item){
-        $(item).prop('isShow', false)
+        $(item).prop('isShow', false);
+        $(item).find('input').on('valuechange', function(){
+            console.log('change');
+        });
     });
     $('.my-select').click(function(){
         var $t = $(this);
@@ -176,8 +184,12 @@
         $('.i-triangle').toggleClass('is-reverse');
         clearTimeout( timer );
 
+        //设置option位置
+
+
         if( on === false ){
             p.find('.my-option').show();
+            console.log( $('.my-option').offset() );
             timer = setTimeout(function(){
                 p.find('.my-option').addClass('show');
             }, 14);
@@ -201,13 +213,20 @@
     $('.my-option').on('click', 'li', function(){
         var $t = $(this);
         var wrap = $t.parents('.my-select-wrap');
+        var input = wrap.find('input');
+        var oldValue = wrap.find('input').val();
+        var newValue = $t.text();
         $t.siblings().removeClass('selected');
         $t.addClass('selected');
-        wrap.find('input').val( $t.text() );
+        input.val( $t.text() );
 
         $('.my-select').trigger('click');
 
         $(document).off('click');
+
+        if(oldValue !== newValue){
+            input.trigger('valuechange');
+        }
     });
 
 </script>

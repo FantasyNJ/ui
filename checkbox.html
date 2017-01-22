@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .checkbox{
+            display: inline-block;
+            user-select: none;
+        }
+        input[type="checkbox"]{
+            display: none;
+        }
+        .checkbox-wrap{
+            display: inline-block;
+            cursor: pointer;
+        }
+        .checkbox-btn{
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            line-height: 18px;
+            text-align: center;
+            box-sizing: border-box;
+            border: 1px solid #bfcbd9;
+            border-radius: 4px;
+            background-color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+            vertical-align: top;
+        }
+        .checkbox-title{
+            vertical-align: middle;
+            font-size: 14px;
+        }
+        .checkbox-btn{
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            line-height: 16px;
+            text-align: center;
+            box-sizing: border-box;
+            border: 1px solid #bfcbd9;
+            border-radius: 4px;
+            background-color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            transition: .25s cubic-bezier(.71,-.46,.29,1.46);
+        }
+        .checkbox-btn:hover{
+            border-color: #0190fe;
+        }
+        .checkbox-btn:before{
+            content: " ";
+            display: inline-block;
+            width: 4px;
+            height: 8px;
+            border: 2px solid #fff;
+            border-top: 0;
+            border-left: 0;
+            transform: rotate(45deg) scaleY(0);
+            transition: .25s cubic-bezier(.71,-.46,.29,1.46);
+        }
+        input[type="checkbox"]:checked + .checkbox-wrap > .checkbox-btn{
+            border-color: #0190fe;
+            background-color: #20a0ff;
+        }
+        input[type="checkbox"]:checked + .checkbox-wrap > .checkbox-btn:before{
+            transform: rotate(45deg) scaleY(1);
+        }
+        input[type="checkbox"]:checked + .checkbox-wrap > .checkbox-btn{
+            border-color: #0190fe;
+            background-color: #20a0ff;
+        }
+        input[type="checkbox"]:disabled + .checkbox-wrap{
+            cursor: not-allowed;
+        }
+        input[type="checkbox"]:disabled + .checkbox-wrap > .checkbox-btn{
+            border-color: #d1dbe5;
+            background-color: #eef1f6;
+        }
+        input[type="checkbox"]:checked:disabled + .checkbox-wrap > .checkbox-btn{
+            background-color: #d1dbe5;
+        }
+        input[type="checkbox"]:disabled + .checkbox-wrap > .checkbox-btn:hover{
+            border-color: #d1dbe5;
+        }
+    </style>
+</head>
+<body>
+<label class="checkbox">
+    <input type="checkbox" name="1" value="1">
+    <span class="checkbox-wrap">
+        <span class="checkbox-btn"></span>
+        <span class="checkbox-title">哈哈</span>
+    </span>
+</label>
+<p></p>
+<label class="checkbox">
+    <input type="checkbox" name="2" value="1">
+    <span class="checkbox-wrap">
+        <span class="checkbox-btn"></span>
+        <span class="checkbox-title">哈哈</span>
+    </span>
+</label>
+<p></p>
+<label class="checkbox">
+    <input type="checkbox" name="3" value="1" disabled checked>
+    <span class="checkbox-wrap">
+        <span class="checkbox-btn"></span>
+        <span class="checkbox-title">哈哈</span>
+    </span>
+</label>
+<p></p>
+<label class="checkbox">
+    <input type="checkbox" name="4" value="1" disabled>
+    <span class="checkbox-wrap">
+        <span class="checkbox-btn"></span>
+        <span class="checkbox-title">哈哈</span>
+    </span>
+</label>
+<p></p>
+</body>
+</html>

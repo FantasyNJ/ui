@@ -1,0 +1,126 @@
+﻿<!doctype html>
+</body>
+</html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="icon/icon.css">
+    <style>
+        input[type="radio"]{
+            display: none;
+            opacity: 0;
+        }
+        input[type="radio"]:checked + .radio-wrap>.radio-btn{
+            border-color: #20a0ff;
+            background: #20a0ff;
+            -ms-transition: .15s cubic-bezier(.71,-.46,.88,.6);
+            transition: .15s cubic-bezier(.71,-.46,.88,.6);
+        }
+        input[type="radio"]:checked + .radio-wrap>.radio-btn:before{
+            -ms-transform: translate(-50%, -50%) scale(1);
+            transform: translate(-50%, -50%) scale(1);
+        }
+        input[type="radio"]:disabled + .radio-wrap>.radio-btn{
+            background-color: #eef1f6;
+            border-color: #d1dbe5;
+        }
+        input[type="radio"]:disabled + .radio-wrap{
+            cursor: not-allowed;
+        }
+        input[type="radio"]:disabled:checked + .radio-wrap>.radio-btn{
+            background-color: #d1dbe5;
+        }
+        .radio{
+            display: inline-block;
+            vertical-align: top;
+            line-height: 100%;
+            cursor: pointer;
+        }
+        .radio span{
+            vertical-align: middle;
+        }
+        .radio-btn{
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            position: relative;
+            box-sizing: border-box;
+            background-color: #fff;
+            border: 1px solid #bfcbd9;
+            border-radius: 50%;
+            transition: all 0s;
+            text-align: center;
+        }
+        .radio-btn:hover{
+            border-color: #20a0ff;
+        }
+        .radio-btn:before{
+            content: " ";
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            left: 50%;
+            top: 50%;
+            -ms-transform: translate(-50%, -50%) scale(0);
+            transform: translate(-50%, -50%) scale(0);
+            background-color: #fff;
+            line-height: inherit;
+            -ms-transition: .1s ease-out .1s;
+            transition: .1s ease-out .1s;
+            border-radius: 50%;
+        }
+        .radio-title{
+            font-size: 14px;
+        }
+        .radio-wrap{
+            display: inline-block;
+            cursor: pointer;
+            -moz-user-select: -moz-none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            /*
+              Introduced in IE 10.
+              See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+            */
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+
+    <label class="radio">
+        <input type="radio" name="name" value="1">
+        <span class="radio-wrap">
+            <span class="radio-btn"></span>
+            <span class="radio-title">哈哈</span>
+        </span>
+    </label>
+    <p></p>
+    <label class="radio">
+        <input type="radio" name="name" value="1">
+        <span class="radio-wrap">
+            <span class="radio-btn"></span>
+            <span class="radio-title">哈哈</span>
+        </span>
+    </label>
+    <p></p>
+    <label class="radio">
+        <input type="radio" name="disabled" value="1" disabled checked>
+        <span class="radio-wrap">
+            <span class="radio-btn"></span>
+            <span class="radio-title">哈哈</span>
+        </span>
+    </label>
+    <p></p>
+    <label class="radio">
+        <input type="radio" name="disabled" value="1" disabled>
+        <span class="radio-wrap">
+            <span class="radio-btn"></span>
+            <span class="radio-title">哈哈</span>
+        </span>
+    </label>
+
+</body>
+</html>

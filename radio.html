@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        input[type="radio"]{
+            display: none;
+            opacity: 0;
+        }
+        input[type="radio"]:checked + .radio-wrap{
+            border-color: #20a0ff;
+            background: #20a0ff;
+            transition: .15s cubic-bezier(.71,-.46,.88,.6);
+            /*transition: all 0s;*/
+        }
+        input[type="radio"]:checked + .radio-wrap:before{
+            transform: translate(-50%, -50%) scale(1);
+        }
+        input[type="radio"]:disabled + .radio-wrap{
+            background-color: #eef1f6;
+            border-color: #d1dbe5;
+            cursor: not-allowed;
+        }
+        input[type="radio"]:disabled:checked + .radio-wrap{
+            background-color: #d1dbe5;
+            /*border-color: #d1dbe5;*/
+            /*cursor: not-allowed;*/
+        }
+        .radio{
+            display: inline-block;
+            vertical-align: top;
+            line-height: 100%;
+            cursor: pointer;
+        }
+        .radio span{
+            vertical-align: middle;
+        }
+        .radio-wrap{
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            position: relative;
+            box-sizing: border-box;
+            border: 1px solid #bfcbd9;
+            border-radius: 50%;
+            /*transition: .15s cubic-bezier(.71,-.46,.88,.6);*/
+            transition: all 0s;
+            text-align: center;
+        }
+        .radio-wrap:hover{
+            border-color: #20a0ff;
+        }
+        .radio-wrap:before{
+            content: " ";
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background-color: #fff;
+            line-height: inherit;
+            transition: .1s ease-out .1s;
+            border-radius: 50%;
+        }
+        .radio-title{
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+
+<span class="">
+    <label class="radio">
+        <input type="radio" name="name" value="1">
+        <span class="radio-wrap"></span>
+        <span class="radio-title">哈哈</span>
+    </label>
+    <p></p>
+    <label class="radio">
+        <input type="radio" name="name" value="1">
+        <span class="radio-wrap"></span>
+        <span class="radio-title">哈哈</span>
+    </label>
+    <p></p>
+    <label class="radio">
+        <input type="radio" name="disabled" value="1" disabled checked>
+        <span class="radio-wrap"></span>
+        <span class="radio-title">哈哈</span>
+    </label>
+    <p></p>
+    <label class="radio">
+        <input type="radio" name="disabled" value="1" disabled>
+        <span class="radio-wrap"></span>
+        <span class="radio-title">哈哈</span>
+    </label><br>
+</span>
+
+</body>
+</html>

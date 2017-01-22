@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul{
+            border: 1px solid blue;
+            animation: scale 1s infinite;
+            transform-origin: center top 0px;
+        }
+        li{
+            list-style: none;
+            animation: scale 1s infinite;
+        }
+        @keyframes scale {
+            0%{
+                transform: scaleY(0);
+            }
+            50%{
+                transform: scaleY(1);
+            }
+            100%{
+                transform: scaleY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+</ul>
+</body>
+</html>

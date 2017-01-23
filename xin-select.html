@@ -22,7 +22,7 @@
 
         .my-select-wrap{
             display: inline-block;
-            min-width: 240px;
+            width: 240px;
             height: 36px;
             position: relative;
         }
@@ -40,10 +40,19 @@
             right: 0;
             text-align: center;
             line-height: 36px;
+            -webkit-transform: rotate(0);
+            -webkit-transition: transform .3s;
+            -moz-transform: rotate(0);
+            -moz-transition: transform .3s;
+            -ms-transform: rotate(0);
+            -ms-transition: transform .3s;
             transform: rotate(0);
             transition: transform .3s;
         }
         .my-select .i-triangle.is-reverse{
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
             transform: rotate(180deg);
         }
         .my-select input{
@@ -64,9 +73,14 @@
             outline: none;
             padding: 3px 10px;
             padding-right: 35px;
+            -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+            -moz-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+            -ms-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
             transition: border-color .2s cubic-bezier(.645,.045,.355,1);
             cursor: pointer;
+            -webkit-user-select: none;
             -moz-user-select: none;
+            -ms-user-select: none;
             user-select: none;
         }
         .my-select input:hover{
@@ -76,6 +90,7 @@
         .my-option{
             display: none;
             position: absolute;
+            left: 0;
             z-index: 100;
             width: 100%;
             background-color: #fff;
@@ -85,21 +100,41 @@
             padding: 6px 0;
             max-height: 274px;
             overflow-y: auto;
+            -webkit-transform-origin: center top 0px;
+            -webkit-transform: scaleY(0);
+            -webkit-transition: transform .25s;
+            -moz-transform-origin: center top 0px;
+            -moz-transform: scaleY(0);
+            -moz-transition: transform .25s;
+            -ms-transform-origin: center top 0px;
+            -ms-transform: scaleY(0);
+            -ms-transition: transform .25s;
             transform-origin: center top 0px;
             transform: scaleY(0);
             transition: transform .25s;
             box-shadow: 0 2px 4px rgba(0,0,0,.12), 0 0 6px rgba(0,0,0,.04);
         }
         .my-option li{
+            -webkit-transform: scaleY(0);
+            -webkit-transition: transform .25s;
+            -moz-transform: scaleY(0);
+            -moz-transition: transform .25s;
+            -ms-transform: scaleY(0);
+            -ms-transition: transform .25s;
             transform: scaleY(0);
             transition: transform .25s;
-            transform-origin: center top 0px;
         }
 
         .my-option.show{
+            -webkit-transform: scaleY(1);
+            -moz-transform: scaleY(1);
+            -ms-transform: scaleY(1);
             transform: scaleY(1);
         }
         .my-option.show li{
+            -webkit-transform: scaleY(1);
+            -moz-transform: scaleY(1);
+            -ms-transform: scaleY(1);
             transform: scaleY(1);
         }
 
@@ -131,7 +166,7 @@
 
 <span class="my-select-wrap">
     <div class="my-select">
-        <input type="text" class="next-year-month" readonly="readonly" placeholder="请选择"/>
+        <input type="text" class="inp" readonly="readonly" placeholder="请选择"/>
         <i class="i-triangle icon-triangle"></i>
     </div>
     <ul class="my-option">
@@ -167,29 +202,41 @@
 
 <script src="select/jquery-3.1.1.min.js"></script>
 <script>
-    console.log( $('.my-option').offset() );
-    console.log( $('.my-option').outerWidth() );
 
     var timer = null;
+    var space = 4;
     $('.my-select').each(function(index, item){
         $(item).prop('isShow', false);
-        $(item).find('input').on('valuechange', function(){
+        $(item).find('input').on('change', function(){
             console.log('change');
         });
+        var option = $(item).parent().find('.my-option');
+        option.height(option.height());
     });
     $('.my-select').click(function(){
         var $t = $(this);
         var p = $t.parent();
         var on = $t.prop('isShow');
+        var inp = p.find('input');
+        var option = p.find('.my-option');
+
         $('.i-triangle').toggleClass('is-reverse');
         clearTimeout( timer );
 
-        //设置option位置
-
-
         if( on === false ){
             p.find('.my-option').show();
-            console.log( $('.my-option').offset() );
+
+            //设置option位置
+            var top = inp.offset().top + $t.outerHeight() + space;
+            var optionHeight = option.height();
+            var pos = $t.outerHeight() + space;
+            if(top + optionHeight >= $(window).scrollTop() + window.innerHeight){
+                option.css({'top': '','bottom':pos,'transform-origin': 'center bottom 0px'});
+            }else{
+                option.css({'top':pos,'bottom':'','transform-origin': 'center top 0px'});
+            }
+
+
             timer = setTimeout(function(){
                 p.find('.my-option').addClass('show');
             }, 14);
@@ -225,7 +272,7 @@
         $(document).off('click');
 
         if(oldValue !== newValue){
-            input.trigger('valuechange');
+            input.trigger('change');
         }
     });
 

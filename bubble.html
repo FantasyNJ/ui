@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .bubble{
+            position: absolute;
+            background: #1f2d3d;
+            color: #fff;
+            z-index: 200;
+            border-radius: 4px;
+            padding: 10px;
+            font-size: 12px;
+            transition: opacity .25s;
+            opacity: 0;
+        }
+        .bubble .i-arrow{
+            position: absolute;
+            left: 50%;
+            top: -10px;
+            border-width: 5px;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+        }
+        .bubble .tips{
+            font-size: 12px;
+            line-height: 1.2;
+        }
+    </style>
+</head>
+<body>
+<span class="needBubbleTip" data-text="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈" data-placement="bottom-start">1111111</span>
+
+<script src="select/jquery-3.1.1.min.js"></script>
+<script>
+    $(document).on('mouseover', '.needBubbleTip', function(){
+        var text = $(this).attr('data-text');
+        var placement = $(this).attr('data-placement');
+        bubbleTipShow(text, placement);
+    });
+//    $(document).on('mouseout', '.needBubbleTip', function(){
+//        bubbleTipRemove();
+//    });
+
+    function bubbleTipShow(text, placement){
+        var bubbleWrap = $('<div class="bubble">');
+        var context = '<span class="i-arrow"></span><p class="tips">'+text+'</p>';
+        bubbleWrap.html(context);
+
+        //设置样式
+        switch (placement){
+            case 'bottom-start':
+                ;
+            default:
+                break;
+        }
+
+        $('body').append(bubbleWrap);
+        bubbleWrap.animate({opacity: 1}, 150, 'swing');
+    }
+
+    function bubbleTipRemove(){
+        $('.bubble').animate({opacity: 0}, 150, 'linear', function(){
+            $(this).remove();
+        });
+    }
+</script>
+</body>
+</html>

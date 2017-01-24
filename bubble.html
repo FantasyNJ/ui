@@ -35,7 +35,14 @@
     </style>
 </head>
 <body>
-<span class="needBubbleTip" data-text="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈" data-placement="bottom-end" style="margin: 300px;display: inline-block;">1111111</span>
+<span class="needBubbleTip" data-text="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈" data-placement="left-center" style="margin: 300px;display: inline-block;">
+    1111111<br>
+    1111111<br>
+    1111111<br>
+    1111111<br>
+    1111111<br>
+    1111111<br>
+</span>
 
 <script src="select/jquery-3.1.1.min.js"></script>
 <script>
@@ -52,6 +59,7 @@
         var text = $t.attr('data-text');
         var placement = $t.attr('data-placement');
         var height = $t.outerHeight();
+        var width = $t.outerWidth();
 
         var L = $t.offset().left;
         var T = $t.offset().top;
@@ -66,39 +74,96 @@
         bubbleWrap.append(arrow).append(tips);
         $('body').append(bubbleWrap);
 
-        //设置样式
-        switch (placement){
-            case 'bottom-start':
-                arrowStyle = {
-                    left: 15,
-                    top: -10,
-                    borderBottomColor: '#1f2d3d'
-                };
-                bubbleStyle = {
-                    left: L,
-                    top: T + height + 10
+        var on = false;  //是否需要调整开关，false为不需要调整
+        var attr = ''
+        function setPosition(placement){
+            on = false;   //每次运行函数重置
+
+            //防止第二次设置样式重叠
+            arrowStyle = {};
+            bubbleStyle = {};
+            if( placement.indexOf('bottom') !== -1 ){
+                arrowStyle.top = -10;
+                arrowStyle.borderBottomColor = '#1f2d3d';
+
+                var top = T + height + 10;
+                if(top + bubbleWrap.outerHeight() > $(window).scrollTop() + $(window).innerHeight()){
+                    on = true;
+                    attr = 'top';
                 }
-                break;
-            case 'bottom-end':
-                arrowStyle = {
-                    right: 15,
-                    top: -10,
-                    borderBottomColor: '#1f2d3d'
-                };
-                bubbleStyle = {
-                    left: L + $t.outerWidth() - bubbleWrap.outerWidth(),
-                    top: T + height + 10
+
+                bubbleStyle.top = top;
+            }else if( placement.indexOf('top') !== -1 ){
+                arrowStyle.bottom = -10;
+                arrowStyle.borderTopColor = '#1f2d3d';
+
+                var top = T - (bubbleWrap.outerHeight() + 10);
+                if(top < $(window).scrollTop()){
+                    on = true;
+                    attr = 'bottom';
                 }
-                break;
-            default:
-                break;
+
+                bubbleStyle.top = top;
+            }else if( placement.indexOf('left') !== -1 ){
+                arrowStyle.right = -10;
+                arrowStyle.borderLeftColor = '#1f2d3d';
+
+                var left = T - (bubbleWrap.outerWidth() + 10);
+                if(left < $(window).scrollLeft()){
+                    on = true;
+                    attr = 'right';
+                }
+
+                bubbleStyle.left = left;
+            }else if( placement.indexOf('right') !== -1 ){
+                arrowStyle.left = -10;
+                arrowStyle.borderRightColor = '#1f2d3d';
+
+                var left = L + $t.outerWidth() + 10
+                if(left + bubbleWrap.outerWidth() > $(window).scrollLeft() + $(window).outerWidth()){
+                    on = true;
+                    attr = 'right';
+                }
+
+                bubbleStyle.left = left;
+            }
         }
 
-        if( placement.indexOf('bottom') !== -1 ){
-
+        setPosition(placement);
+        if(on){
+            var arr = placement.split('-');
+            arr[0] = attr;
+            placement = arr.join('-');
+            setPosition(placement);
         }
 
-        console.log(L,$t.outerWidth(), bubbleWrap.outerWidth(),L + $t.outerWidth() - bubbleWrap.outerWidth())
+        if( placement.indexOf('top') !== -1 || placement.indexOf('bottom') !== -1 ){
+            if( placement.indexOf('start') !== -1 ){
+                arrowStyle.left = 15;
+                bubbleStyle.left = L;
+            }else if( placement.indexOf('end') !== -1 ){
+                arrowStyle.right = 15;
+                bubbleStyle.left = L + $t.outerWidth() - bubbleWrap.outerWidth();
+            }else if( placement.indexOf('center') !== -1 ){
+                arrowStyle.left = '50%';
+                arrowStyle.marginLeft = -5;
+
+                bubbleStyle.left = L + ($t.outerWidth() - bubbleWrap.outerWidth())/2;
+            }
+        }else if( placement.indexOf('left') !== -1 || placement.indexOf('right') !== -1 ){
+            if( placement.indexOf('start') !== -1 ){
+                arrowStyle.top = 10;
+                bubbleStyle.top = T;
+            }else if( placement.indexOf('end') !== -1 ){
+                arrowStyle.bottom = 10;
+                bubbleStyle.top = T + ($t.outerHeight() - bubbleWrap.outerHeight());
+            }else if( placement.indexOf('center') !== -1 ){
+                arrowStyle.top = '50%';
+                arrowStyle.marginTop = -5;
+
+                bubbleStyle.top = T + ($t.outerHeight() - bubbleWrap.outerHeight())/2;
+            }
+        }
 
         arrow.css(arrowStyle);
         bubbleWrap.css(bubbleStyle);
@@ -108,9 +173,8 @@
     }
 
     function bubbleTipRemove(){
-        $('.bubble').animate({opacity: 0}, 1500, 'linear', function(){
+        $('.bubble').animate({opacity: 0}, 300, 'linear', function(){
             $(this).remove();
-            console.log(1)
         });
     }
 </script>
